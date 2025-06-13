@@ -1,20 +1,33 @@
 # C# course introduction
 
-## Brief presentation
+- [Brief presentation of C#](#brief-presentation-of-the-language)
+- [Developping with C#](#tools-and-ide-for-c-development)
+- [Creating a project with dotnet CLI tool](#creating-a-project-with-dotnet-cli-tool)
+- [Create projects with IDEs](#create-projects-with-ides)
+- [Basic types](#basic-types)
+- [First statements](#first-statements)
+- [Basic i/o](#basic-io)
+- [String interpolation](#string-interpolation)
+- [Input conversion](#input-conversion)
+- [The if statement](#the-if-statement)
+
+## Brief presentation of the language
 
 - Created par Anders Hejlsberg, Scott Wiltamuth, and Peter Golde from Microsoft
 - The first version was publicly available in 2000
 - General purpose language, used for desktop, web, game development, etc.
-- It is the preferred language for software that targets Windows (although there is VB.Net) 
+- It is the preferred language for software that target Windows (although there is VB.Net) 
 
-## Developping with C#
+Tutorials and language reference are available on [Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/csharp/). 
+
+## Tools and IDE for C# development
 
 - Visual Studio from MS (historically the reference IDE for C#)
 - JetBrains Rider
 - VS Code with C# extensions
 - `dotnet` command line tool
 
-`dotnet` is a CLI tool used to create and manage application with the .NET framework.
+`dotnet` is a CLI tool used to create and manage projects built on top of the .NET framework.
 
 It is available via the .NET SDK provided by Microsoft. Once you have downladed and installed the SDK,
 verify that the `dotnet` command is available by entering in a terminal: 
@@ -70,7 +83,7 @@ Display templates available on NuGet.org with:
    dotnet new search web
 ```
 
-You can create a large range of applications with the .NET framework.
+As you can see, one can create a large range of applications with C# and the .NET framework.
 
 ### Note
 
@@ -110,9 +123,9 @@ Hello, world!
 
 If you display the content of the directory, you will notice a new `bin`  folder that contains the compiled files.
 
-## Create projects with VS Code
+## Create projects with IDEs
 
-You can also create projects using VS Code if you don't want to use the CLI.
+You can also create projects using VS Code or other IDEs if you don't want to use the CLI.
 
 In VS Code, use the Ctrl+Shift+P shortcut to open the command palette then choose `.NET: New Project` and follow
 the instructions.
@@ -122,9 +135,9 @@ the instructions.
 C# offers the common basic types available in almost all languages:
 
 - Characters are represented by the 2-byte long `char` type.
-- Integers: `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, and `ulong`.
+- Integers: `sbyte` (signed byte), `byte` (unsigned byte), `short`, `ushort`, `int`, `uint`, `long`, and `ulong`.
 - Floating point types: `float`, `double`, and `decimal`.
-- Strings.
+- `string`.
 
 ## First statements
 
@@ -133,11 +146,33 @@ C# offers the common basic types available in almost all languages:
 Variables are declared like it is done in C, C++, or Java:
 
 ```csharp
+char ch
+int n;
+double d;
+string s;
+```
+
+The variables in the example are uninitialized. Using a variable without assigning it a value will result an error.
+It is recommended to always assign a value to a variable at its declaration. 
+
+```csharp
 char grade = 'A';
 int age = 21;
 float length = 4.9f;
 double pi = 3.14d;
 string message = "This is a dummy message";
+```
+
+You can also assign the default value of its type to a variable using the `default` keyword:
+
+```csharp
+int a = default(int);
+```
+
+You can use the **default literal** to initialize a variable with the default value of its type:
+
+```csharp
+int a = default;
 ```
 
 When the type of the variable can be deduced from its value, we can use the var keyword:
@@ -154,7 +189,7 @@ Basic i/o is done using the `Console` class.
 - `Console.Write` & `Console.WriteLine` for output;
 - `Console.Read` (to get a character from the input) & `Console.ReadLine` for input.
 
-The `write` methods are overload and accepts arguments of several types.
+The `write` methods are overloaded and accepts arguments of several types.
 
 ```csharp
 DateTime localDate = DateTime.Now;
@@ -209,14 +244,17 @@ on Microsoft website.
 Similar to the one available in C, C++, and Java.
 
 ```csharp
-if (<condition>) {
+if (<condition>)
+{
   // do something...
-} else {
+}
+else
+{
   // do something else...
 }
 ```
 
-### Example
+An example that reads the user age and tells if he is allowed to party or not:
 
 ```csharp
 string line;
@@ -225,14 +263,85 @@ Console.Write("Enter your age: ");
 
 var age = Convert.ToInt32(Console.ReadLine()!);
 
-if (age>= 18) {
+if (age>= 18)
+{
   Console.WriteLine("You are allowed to enter");
-} else {
+}
+else
+{
   Console.WriteLine("Sorry, come back later")
 }
 ```
 
-### Exercises
+## Exercises
 
-- Write a program that reads the 2d coordinates of three points and determines if their colinear.
-- Write a program that read a year and check if it is a leap year or not.
+1. Write a program that reads the 2d coordinates of three points and determines if their collinear.
+2. Write a program that reads a year and checks if it is a leap year or not.
+
+### Excercise 1 solutions
+
+First solution (simple):
+
+```csharp
+Console.Write("Enter the two coordinates of the first point: ");
+
+var tokens = Console.ReadLine()!.Split(' ');
+
+int x1 = Convert.ToInt32(tokens[0]);
+int y1 = Convert.ToInt32(tokens[1]);
+
+Console.Write("Enter the two coordinates of the second point: ");
+tokens = Console.ReadLine()!.Split(' ');
+
+int x2 = Convert.ToInt32(tokens[0]);
+int y2 = Convert.ToInt32(tokens[1]);
+
+Console.Write("Enter the two coordinates of the third point: ");
+tokens = Console.ReadLine()!.Split(' ');
+
+int x3 = Convert.ToInt32(tokens[0]);
+int y3 = Convert.ToInt32(tokens[1]);
+int det = (x2 - x1) * (y3 - y2) - (x3 - x2) * (y2 - y1);
+
+if (det == 0)
+{
+ Console.WriteLine("The numbers are colinear");
+}
+else
+{
+  Console.WriteLine("The numbers are not colinear");
+}
+```
+
+Second solution (styled):
+
+```csharp
+class Program
+{
+  public static void Main(String[] args)
+  {
+    var a = ReadPoint("A");
+    var b = ReadPoint("B");
+    var c = ReadPoint("C");
+    int det = (b.x - a.x) * (c.y - b.y) - (c.x - b.x) * (b.y - a.y);
+
+    if (det == 0)
+    {
+      Console.WriteLine("The numbers are colinear");
+    }
+    else
+    {
+      Console.WriteLine("The numbers are not colinear");
+    }
+  }
+
+  public static (int x, int y) ReadPoint(string name)
+  {
+    Console.Write($"Enter the two coordinates of the point {name}: ");
+
+    var tokens = Console.ReadLine()!.Split(' ');
+
+    return (x: Convert.ToInt32(tokens[0]), y: Convert.ToInt32(tokens[1]));
+  }
+}
+```
