@@ -113,7 +113,7 @@ for (int i = 0; i < 10; i++)
 }
 ```
 
-The snippet above shows the elements of the for statement:
+The snippet above shows the elements of the `for` statement:
 
 - The initializer section that is executed only once, before entering the loop. Typically, you declare and initialize
   a local loop variable in that section. The declared variable can't be accessed from outside the for statement.
@@ -203,7 +203,7 @@ Console.WriteLine($"The loop run {count} times to find the answer");
 ```
 
 
-The `continue` statement skip the current iteration of a loop and moves to the next one.
+The `continue` statement skips the current iteration of a loop and moves to the next one.
 
 ## Arrays
 
@@ -295,43 +295,28 @@ foreach (var item in array)
 
 ## Exercises
 
+- Write a program that computes the factorial of a number supplied by the user.
+- Write a program that displays the perfect numbers below 500. A perfect number is a positive integer that equals
+  the sum of its proper divisors (the divisors excluding the number itself).
 - Write a program that uses the Eratosthenes sieve to output all prime numbers (one per line) below 100.
   **Bonus:** Allow the user to enter the limit and output the prime numbers in a simple text file.
-- Write a program that read a grid (from a file named `input.txt` in the current directory) that represents a maze
-  and checks if it is possible to exit the maze or not.
+- Write a program that draws a diamond. The user will enter the length of the middle row. Below is a
+  diamond with a middle row of length 9. Note that this length is always an odd number.
 
-  Here are some examples of mazes:
-
-  ```
-  S.#.....#.....#....#
-  #.#.###.#.###.#.##.#
-  #.#...#.#.#.#.#.#..#
-  #.###.#.#.#.#.#.#.##
-  #.#...#...#.#.#.#..#
-  #.#.#######.#.#.##.#
-  #.#.........#.#....#
-  #.###########.######
-  #...........#......#
-  ###.#####.#.######.#
-  #...#...#.#.#....#.#
-  #.###.#.#.#.#.##.#.#
-  #.#...#.#.#.#..#.#.#
-  #.#.###.#.#.##.#.#.#
-  #.#.#...#.#.#..#.#.#
-  #.#.#.###.#.#.##.#.#
-  #.#.#.....#.#....#.#
-  #.#.#######.######.E
+  ```txt
+      *
+     ***
+    *****
+   *******
+  *********
+   *******
+    *****
+     ***
+      *
   ```
 
-  ```
-  ##########
-  S.....#..#
-  #.##.#.##.
-  #.#..#...#
-  #.#.###.#.
-  #...#.#.#.
-  ###.#.#.#.
-  #...#.#.#E
-  #.###.#..#
-  ##########
+  In C#, you can create a string that is the repetition of a character with:
+
+  ```csharp
+  var s = new string('x', 4);
   ```
