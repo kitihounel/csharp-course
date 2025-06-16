@@ -296,6 +296,7 @@ foreach (var item in array)
 ## Exercises
 
 - Write a program that computes the factorial of a number supplied by the user.
+- Write a program that finds the GCD of two positive numbers.
 - Write a program that displays the perfect numbers below 500. A perfect number is a positive integer that equals
   the sum of its proper divisors (the divisors excluding the number itself).
 - Write a program that uses the Eratosthenes sieve to output all prime numbers (one per line) below 100.
