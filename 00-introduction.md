@@ -7,8 +7,8 @@
 - [Basic types](#basic-types)
 - [First statements](#first-statements)
 - [Basic i/o](#basic-io)
-- [String interpolation](#string-interpolation)
 - [Input conversion](#input-conversion)
+- [String interpolation](#string-interpolation)
 - [The if statement](#the-if-statement)
 
 ## Brief presentation of the language
@@ -146,7 +146,7 @@ C# offers the common basic types available in almost all languages:
 Variables are declared like it is done in C, C++, or Java:
 
 ```csharp
-char ch
+char ch;
 int n;
 double d;
 string s;
@@ -187,15 +187,101 @@ var amount = 1.8m;
 Basic i/o is done using the `Console` class.
 
 - `Console.Write` & `Console.WriteLine` for output;
-- `Console.Read` (to get a character from the input) & `Console.ReadLine` for input.
+- `Console.Read` (to get a character from the input) & `Console.ReadLine` (everything the user types before pressing the *Enter* key) for input.
 
-The `write` methods are overloaded and accepts arguments of several types.
+The following example prints the current date and time:
 
 ```csharp
 DateTime localDate = DateTime.Now;
 
-Console.WriteLine("Current local date is: " + localDate.ToString());
+Console.WriteLine("Current local date is: " + localDate);
 ```
+
+The `+` operator is used for string concatenation.
+
+**Note:** The `write` methods are overloaded and accept arguments of several types.
+
+### Basic i/o exercises
+
+- Write a program that asks for a name and greets the person. For example, if the user enters "John",
+  the program will print "Hello, John" (without the quotes).
+
+  ```csharp
+  string name;
+
+  Console.Write("Pleaser, enter your name: ");
+  name = Console.ReadLine();
+  Console.WriteLine("Hello, " + name);
+  ```
+
+## Input conversion
+
+The `Console.ReadLine` method returns a string. This is different from C or C++ when you can specify the type of
+the value you want to read. C# has the `Convert` class that offers utility methods to carry conversion between types.
+
+The following program tries to compute the age of the user:
+
+```csharp
+string year;
+int age;
+
+Console.Write("Enter your birth year: ");
+year = Console.ReadLine();
+age = 2024 - year;
+
+Console.WriteLine("You are " + age + "-year old.");
+```
+
+We need to convert the value supplied by the user to an integer before using it.
+
+```csharp
+string s;
+int year, age;
+
+Console.Write("Enter your birth year: ");
+s = Console.ReadLine();
+year = Convert.ToInt32(s);
+age = 2024 - year;
+
+Console.WriteLine("You are " + age + "-year old.");
+```
+
+### Exercise on input conversion
+
+Write a program that reads two numbers and display their sum.
+
+### Solution
+
+```csharp
+int a, b;
+string line;
+
+Console.Write("Enter the first number: ");
+line = Console.ReadLine();
+a = Convert.ToInt32(line);
+
+Console.Write("Enter the second number: ");
+line = Console.ReadLine();
+b = Convert.ToInt32(line);
+
+Console.WriteLine($"The sum of the numbers is: {a + b}");
+```
+
+Here is an alternative solution.
+
+```csharp
+Console.Write("Enter two numbers: ");
+
+string line = Console.ReadLine()!;
+string[] tokens = line.Split(' ');
+int a = Convert.ToInt32(tokens[0]);
+int b = Convert.ToInt32(tokens[1]);
+
+Console.WriteLine($"The sum of the numbers is: {a + b}");
+```
+
+The complete class reference is availble [here](https://learn.microsoft.com/en-us/dotnet/api/system.convert?view=net-9.0)
+on Microsoft website.
 
 ## String interpolation
 
@@ -219,25 +305,6 @@ var food = "meat";
 
 Console.WriteLine($"My name is {name}, I am {age} and I love {food}");
 ```
-
-## Input conversion
-
-The `Console.ReadLine` method returns a string. This is different from C or C++ when you can specify the type of
-the value you want to read. C# has the `Convert` class that offers utility methods to carry conversion between types.
-
-```csharp
-Console.Write("Enter two numbers: ");
-
-string line = Console.ReadLine()!;
-string[] tokens = line.Split(' ');
-int a = Convert.ToInt32(tokens[0]);
-int b = Convert.ToInt32(tokens[1]);
-
-Console.WriteLine($"The sum of the numbers is: {a + b}");
-```
-
-The complete class reference is availble [here](https://learn.microsoft.com/en-us/dotnet/api/system.convert?view=net-9.0)
-on Microsoft website.
 
 ## The if statement
 
