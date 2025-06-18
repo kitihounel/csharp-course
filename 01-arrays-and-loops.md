@@ -326,7 +326,7 @@ foreach (var item in array)
 
 #### Eratosthenes sieve
 
-```cshasp
+```csharp
 class Program
 {
     public static void Main()
