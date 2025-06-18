@@ -321,3 +321,73 @@ foreach (var item in array)
   ```csharp
   var s = new string('x', 4);
   ```
+
+### Solutions
+
+#### Eratosthenes sieve
+
+```cshasp
+class Program
+{
+    public static void Main()
+    {
+        int limit, n;
+
+        do
+        {
+            Console.Write("Enter the limit: ");
+            limit = Convert.ToInt32(Console.ReadLine());
+        } while (limit < 2);
+
+        var primes = GeneratePrimes(limit, out n);
+
+        Console.WriteLine("Number of primes: " + n);
+        foreach (var p in primes)
+        {
+            if (p == 0)
+            {
+                break;
+            }
+
+            Console.WriteLine(p);
+        }
+        Console.WriteLine("Size of the array: " + primes.Length);
+    }
+
+    public static int[] GeneratePrimes(int limit, out int count)
+    {
+        int k = (int) Math.Floor(limit / 1.2); // Estimation du nombre de premiers
+        int[] primes = new int[k]; // Tableau pour contenir les nombres premiers
+
+        bool[] crossed = new bool[limit + 1]; // Utilisé pour barrer les nombres
+        int i = 2; // On compte à partir de 2
+
+        while (i * i <= limit) // On s'assure qu'on est sur la première ligne de la matrice
+        {
+            if (crossed[i]) // Le nombre est barré. On l'ignore
+            {
+                ++i;
+                continue;
+            }
+              
+            for (int j = 2 * i; j <= limit; j += i)
+            {
+                crossed[j] = true;
+            }
+            ++i;
+        }
+
+        count = 0;
+        for (i = 2; i <= limit; ++i)
+        {
+            if (!crossed[i])
+            {
+                primes[count] = i;
+                ++count;
+            }
+        }
+
+        return primes;
+    }
+}
+```
