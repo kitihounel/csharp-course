@@ -42,6 +42,7 @@ The following program runs approximatively for 5s and displays a message to the 
 var start = DateTime.Now;
 var end = start.AddSeconds(5);
 
+Console.WriteLine("Current time: " + DateTime.Now);
 while (DateTime.Now <= end) // C# has allows operator overloading, so we can do this comparison
 {
     Console.WriteLine("Sleep for 1 second.");
@@ -49,6 +50,7 @@ while (DateTime.Now <= end) // C# has allows operator overloading, so we can do 
 }
 
 Console.WriteLine("Done...");
+Console.WriteLine("Current time: " + DateTime.Now);
 ```
 
 ## The do statement
@@ -274,8 +276,8 @@ for (int i = 0; i < names.Length; ++i)
 ### Common operations
 
 - Get the array size: `array.Length` (it is a property, not a method).
-- Get the first element: `array.First()`.
-- Get the first or last element: `array.Last()`.
+- Get the first element: `array.First()`. Same as `array[0]`.
+- Get the first or last element: `array.Last()`. Same as `array[array.Length - 1]`.
 - Check if the array contains a value: `array.Contains()`.
 
 There are many more. Check the language reference for more.
@@ -294,6 +296,20 @@ foreach (var item in array)
 ```
 
 ## Exercises
+
+- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays the squares of all elements in the array.
+- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays each element raised to the power of its index.
+  The program should display:
+  
+  ```txt
+  7 ^ 0 = 1
+  8 ^ 1 = 0
+  21 ^ 2 = 41
+  ...
+  ```
+  
+  You can use the `Math.Pow()` method to compute the power of a number. If you want more challenge, you can ask the user to provide the content
+  of the array.
 
 - Write a program that computes the factorial of a number supplied by the user.
 - Write a program that finds the GCD of two positive numbers.
@@ -390,4 +406,24 @@ class Program
         return primes;
     }
 }
+```
+
+#### Read array content from user
+
+```csharp
+int[] array;
+int n;
+
+Console.Write("Array size: ");
+n = Convert.ToInt32(Console.ReadLine());
+
+array = new int[n];
+
+for (int i = 0; i < n; ++i)
+{
+    Console.Write("Enter a value: ");
+    array[i] = Convert.ToInt32(Console.ReadLine());
+}
+
+Console.WriteLine("Values: " + string.Join(", ", array));
 ```
