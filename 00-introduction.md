@@ -182,6 +182,21 @@ var username = "luffy";
 var amount = 1.8m;
 ```
 
+#### Get the type of a variable
+
+You can the type of a variable with the `GetType()` method.
+
+```csharp
+var n = default(int);
+var s = "tuesday";
+
+Console.WriteLine("The type of 'n' is: " + n.GetType());
+Console.WriteLine("The type of 's' is: " + s.GetType());
+Console.WriteLine("n is an int: " + (n is int));
+```
+
+You can also use the `is` operator to check if a varible belongs to a given type.
+
 ## Basic i/o
 
 Basic i/o is done using the `Console` class.
@@ -303,7 +318,7 @@ var name = "Monkey D Luffy";
 var age = 21;
 var food = "meat";
 
-Console.WriteLine($"My name is {name}, I am {age} and I love {food}");
+Console.WriteLine($"My name is {name}, I am {age}-year old, and I love {food}");
 ```
 
 ## The if statement
@@ -324,19 +339,17 @@ else
 An example that reads the user age and tells if he is allowed to party or not:
 
 ```csharp
-string line;
-
 Console.Write("Enter your age: ");
 
 var age = Convert.ToInt32(Console.ReadLine()!);
 
-if (age>= 18)
+if (age >= 18)
 {
   Console.WriteLine("You are allowed to enter");
 }
 else
 {
-  Console.WriteLine("Sorry, come back later")
+  Console.WriteLine("Sorry, come back later");
 }
 ```
 
