@@ -297,8 +297,11 @@ foreach (var item in array)
 
 ## Exercises
 
-- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays the squares of all elements in the array.
-- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays each element raised to the power of its index.
+- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays the squares of all elements
+  in the array.
+- Given the static array `int[] values = {7, 8, 21, 17, 31}`, write a program that displays each element raised to the
+  power of its index.
+
   The program should display:
   
   ```txt
@@ -315,8 +318,6 @@ foreach (var item in array)
 - Write a program that finds the GCD of two positive numbers.
 - Write a program that displays the perfect numbers below 500. A perfect number is a positive integer that equals
   the sum of its proper divisors (the divisors excluding the number itself).
-- Write a program that uses the Eratosthenes sieve to output all prime numbers (one per line) below 100.
-  **Bonus:** Allow the user to enter the limit and output the prime numbers in a simple text file.
 - Write a program that draws a diamond. The user will enter the length of the middle row. Below is a
   diamond with a middle row of length 9. Note that this length is always an odd number.
 
@@ -339,74 +340,6 @@ foreach (var item in array)
   ```
 
 ### Solutions
-
-#### Eratosthenes sieve
-
-```csharp
-class Program
-{
-    public static void Main()
-    {
-        int limit, n;
-
-        do
-        {
-            Console.Write("Enter the limit: ");
-            limit = Convert.ToInt32(Console.ReadLine());
-        } while (limit < 2);
-
-        var primes = GeneratePrimes(limit, out n);
-
-        Console.WriteLine("Number of primes: " + n);
-        foreach (var p in primes)
-        {
-            if (p == 0)
-            {
-                break;
-            }
-
-            Console.WriteLine(p);
-        }
-        Console.WriteLine("Size of the array: " + primes.Length);
-    }
-
-    public static int[] GeneratePrimes(int limit, out int count)
-    {
-        int k = (int) Math.Floor(limit / 1.2); // Estimation du nombre de premiers
-        int[] primes = new int[k]; // Tableau pour contenir les nombres premiers
-
-        bool[] crossed = new bool[limit + 1]; // Utilisé pour barrer les nombres
-        int i = 2; // On compte à partir de 2
-
-        while (i * i <= limit) // On s'assure qu'on est sur la première ligne de la matrice
-        {
-            if (crossed[i]) // Le nombre est barré. On l'ignore
-            {
-                ++i;
-                continue;
-            }
-              
-            for (int j = 2 * i; j <= limit; j += i)
-            {
-                crossed[j] = true;
-            }
-            ++i;
-        }
-
-        count = 0;
-        for (i = 2; i <= limit; ++i)
-        {
-            if (!crossed[i])
-            {
-                primes[count] = i;
-                ++count;
-            }
-        }
-
-        return primes;
-    }
-}
-```
 
 #### Read array content from user
 
