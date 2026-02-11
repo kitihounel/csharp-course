@@ -6,7 +6,8 @@
 - [Virtual methods](#virtual-methods)
 - [Abstract classes](#abstract-classes)
 - [Interfaces](#interfaces)
-- [Practice: utility class](#practice-utility-class-to-handle-physician-and-patient-numbers-generation)
+- [Namespaces](#namespaces)
+- [Practice](#practice)
 
 ## Introduction
 
@@ -402,7 +403,7 @@ public class Program
 }
 ```
 
-### Practice
+### Practice on abstract classes
 
 Let's make our `Person` class abstract with a virtual method that should be implemented by other classes.
 
@@ -538,7 +539,11 @@ class Program
 }
 ```
 
-## Practice: utility class to handle physician and patient numbers generation
+## Namespaces
+
+## Practice
+
+### Utility class to handle physician and patient numbers generation
 
 ```csharp
 var p1 = new Physician("Greg", 'M', new DateOnly(1984, 11, 25), new Speciality("Nephrology"));
@@ -653,6 +658,55 @@ class Patient: Person
     public override void SayHello()
     {
         Console.WriteLine($"{GetType()} {number}:  {Name}");
+    }
+}
+```
+
+### Point and Line classes
+
+```csharp
+var p = new Point(1, 1);
+var q = new Point(2, 2);
+var r = new Point(3, 3);
+var u = new Point(0, -1);
+
+var line = new Line(p, q);
+
+Console.WriteLine($"(PQ) contains R: {l.Contains(r)}");
+Console.WriteLine($"(PQ) contains U: {l.Contains(u)}");
+
+public class Point
+{The
+    public double X { get; set; }
+    public double Y { get; set; }
+
+    public Point(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+public class Line
+{
+    public double M { get; set; }
+    public double Y { get; set; }
+
+    public Line(double m, double y)
+    {
+        M = m;
+        Y = y;
+    }
+
+    public Line(Point p, Point q)
+    {
+        M = (q.Y - p.Y) / (q.X - p.X);
+        Y = p.Y - M * p.X;
+    }
+
+    public bool Contains(Point p)
+    {
+        return p.Y == M * p.X + Y;
     }
 }
 ```
